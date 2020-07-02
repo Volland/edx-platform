@@ -35,6 +35,8 @@ class ProgressTabTestViews(BaseCourseHomeTests):
         self.assertIsNotNone(response.data['courseware_summary'])
         for chapter in response.data['courseware_summary']:
             self.assertIsNotNone(chapter)
+        self.assertIn(str(self.course.id), response.data['studio_url'])
+        self.assertIn('settings/grading', response.data['studio_url'])
 
     def test_get_authenticated_user_not_enrolled(self):
         response = self.client.get(self.url)
