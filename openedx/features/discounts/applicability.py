@@ -147,7 +147,7 @@ def _is_in_holdback_and_bucket(user):
     Return whether the specified user is in the first-purchase-discount holdback group.
     This will also stable bucket the user.
     """
-    if datetime(2020, 8, 1, tzinfo=pytz.UTC) <= datetime.now(tz=pytz.UTC):
+    if datetime(2021, 8, 1, tzinfo=pytz.UTC) <= datetime.now(tz=pytz.UTC):
         return False
 
     # Holdback is 10%
@@ -155,7 +155,6 @@ def _is_in_holdback_and_bucket(user):
 
     request = get_current_request()
     if hasattr(request, 'session') and DISCOUNT_APPLICABILITY_HOLDBACK not in request.session:
-
         properties = {
             'site': request.site.domain,
             'app_label': 'discounts',

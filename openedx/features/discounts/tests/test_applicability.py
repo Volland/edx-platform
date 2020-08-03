@@ -166,7 +166,6 @@ class TestApplicability(ModuleStoreTestCase):
         (1, False),
     )
     @ddt.unpack
-    @pytest.mark.skip(reason="fix under work by revenue team")
     def test_holdback_group_ids(self, group_number, in_holdback):
         with patch('openedx.features.discounts.applicability.stable_bucketing_hash_group', return_value=group_number):
             assert _is_in_holdback_and_bucket(self.user) == in_holdback
@@ -175,6 +174,6 @@ class TestApplicability(ModuleStoreTestCase):
         with patch('openedx.features.discounts.applicability.stable_bucketing_hash_group', return_value=0):
             with patch(
                 'openedx.features.discounts.applicability.datetime',
-                Mock(now=Mock(return_value=datetime(2020, 8, 1, 0, 1, tzinfo=pytz.UTC)), wraps=datetime),
+                Mock(now=Mock(return_value=datetime(2021, 8, 1, 0, 1, tzinfo=pytz.UTC)), wraps=datetime),
             ):
                 assert not _is_in_holdback_and_bucket(self.user)
